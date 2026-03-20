@@ -57,6 +57,7 @@
             font-size: 32px; font-weight: 600;
             background: linear-gradient(135deg, var(--primary-dark), #a57878);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .last-updated { color: var(--text-light); font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 5px; }
         .language-switcher { display: flex; justify-content: center; gap: 15px; margin: 20px 0 25px; flex-wrap: wrap; }
@@ -188,144 +189,262 @@
     let currentLang = 'ru';
     let currentTab = 'privacy';
     
-    // Полные переводы для всех текстов
-    const translations = {
-        appName: { ru: "Мастер-колорист", en: "Hair Colorist", zh: "染发专家" },
-        privacyTab: { ru: "Политика конфиденциальности", en: "Privacy Policy", zh: "隐私政策" },
-        eulaTab: { ru: "Лицензионное соглашение", en: "License Agreement", zh: "许可协议" },
-        lastUpdated: { ru: "Дата последнего обновления:", en: "Last updated:", zh: "最后更新:" },
-        copyright: { ru: "Все права защищены.", en: "All rights reserved.", zh: "保留所有权利。" },
-        author: { ru: "Чигракова Анастасия Сергеевна", en: "Anastasia Chigrakova", zh: "阿纳斯塔西娅·奇格拉科娃" },
-        
-        // Privacy Policy content
-        privacy: {
-            title: { ru: "ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ", en: "PRIVACY POLICY", zh: "隐私政策" },
-            s1_title: { ru: "1. ОБЩИЕ ПОЛОЖЕНИЯ", en: "1. GENERAL PROVISIONS", zh: "1. 总则" },
-            s1_1: { ru: "1.1. Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных пользователей мобильного приложения «Мастер-колорист» («Приложение»), разработанного Чиграковой Анастасией Сергеевной («Оператор»).", en: "1.1. This Privacy Policy defines the procedure for processing and protecting personal data of users of the mobile application 'Hair Colorist' ('Application'), developed by Anastasia Chigrakova ('Operator').", zh: "1.1. 本隐私政策规定了由阿纳斯塔西娅·奇格拉科娃（'运营商'）开发的移动应用程序'染发专家'（'应用程序'）用户个人数据的处理和保护程序。" },
-            s1_2: { ru: "1.2. Оператор обязуется соблюдать конфиденциальность персональных данных Пользователя в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».", en: "1.2. The Operator undertakes to maintain the confidentiality of the User's personal data in accordance with Federal Law No. 152-FZ of July 27, 2006 'On Personal Data'.", zh: "1.2. 运营商承诺根据2006年7月27日第152-FZ号联邦法律'关于个人数据'对用户的个人数据保密。" },
-            s1_3: { ru: "1.3. Используя Приложение, Пользователь выражает своё согласие с условиями настоящей Политики.", en: "1.3. By using the Application, the User expresses their consent to the terms of this Policy.", zh: "1.3. 使用应用程序即表示用户同意本政策的条款。" },
-            
-            s2_title: { ru: "2. КАКИЕ ДАННЫЕ МЫ СОБИРАЕМ", en: "2. WHAT DATA WE COLLECT", zh: "2. 我们收集哪些数据" },
-            s2_1: { ru: "2.1. Приложение «Мастер-колорист» разработано с минимальным сбором данных. Мы собираем только ту информацию, которая необходима для функционирования Приложения:", en: "2.1. The Hair Colorist application is designed with minimal data collection. We only collect information that is necessary for the Application to function:", zh: "2.1. 染发专家应用程序设计为最小化数据收集。我们只收集应用程序运行所必需的信息：" },
-            s2_tech: { ru: "Технические данные устройства:", en: "Device technical data:", zh: "设备技术数据：" },
-            s2_tech_items: { ru: "тип и версия операционной системы, модель устройства, уникальный идентификатор устройства, версия Приложения, язык и регион устройства", en: "operating system type and version, device model, unique device identifier, application version, device language and region", zh: "操作系统类型和版本、设备型号、唯一设备标识符、应用程序版本、设备语言和区域" },
-            s2_calc: { ru: "Данные, вводимые пользователем для расчётов:", en: "Data entered by the user for calculations:", zh: "用户输入用于计算的数据：" },
-            s2_calc_items: { ru: "тип волос (натуральные, окрашенные, седые), текущий и желаемый цвет волос, длина волос, процент седины, выбранный бренд краски, количество продукта", en: "hair type (natural, colored, gray), current and desired hair color, hair length, percentage of gray hair, selected hair dye brand, amount of product", zh: "头发类型（自然、染色、白发）、当前和期望的头发颜色、头发长度、白发百分比、选择的染发剂品牌、产品数量" },
-            s2_not_collect: { ru: "Приложение НЕ собирает и НЕ передаёт:", en: "The application does NOT collect or transfer:", zh: "应用程序不收集也不传输：" },
-            s2_not_items: { ru: "Фотографии и изображения пользователей, геолокационные данные, контактную информацию, данные платёжных карт, данные из адресной книги или социальных сетей.", en: "Photos and images of users, geolocation data, contact information, payment card data, data from the address book or social networks.", zh: "用户的照片和图像、地理位置数据、联系信息、支付卡数据、地址簿或社交网络数据。" },
-            
-            s3_title: { ru: "3. ЦЕЛИ СБОРА ДАННЫХ", en: "3. PURPOSES OF DATA COLLECTION", zh: "3. 数据收集目的" },
-            s3_1: { ru: "3.1. Собранные данные используются исключительно для следующих целей:", en: "3.1. The collected data is used exclusively for the following purposes:", zh: "3.1. 收集的数据仅用于以下目的：" },
-            s3_items: { ru: "Обеспечения корректной работы Приложения и выполнения расчётов; Улучшения функциональности и пользовательского опыта; Анализа использования Приложения через сервисы аналитики; Показа релевантной рекламы; Выявления и устранения ошибок; Соблюдения требований законодательства РФ.", en: "Ensuring the correct operation of the Application and performing calculations; Improving functionality and user experience; Analyzing the use of the Application through analytics services; Showing relevant advertising; Identifying and fixing errors; Compliance with the requirements of the current legislation of the Russian Federation.", zh: "确保应用程序正常运行和执行计算；改进功能和用户体验；通过分析服务分析应用程序的使用情况；展示相关广告；识别和修复错误；遵守俄罗斯联邦现行法律的要求。" },
-            
-            s4_title: { ru: "4. ОБРАБОТКА И ХРАНЕНИЕ ДАННЫХ", en: "4. DATA PROCESSING AND STORAGE", zh: "4. 数据处理和存储" },
-            s4_1: { ru: "4.1. Все расчёты производятся локально на устройстве Пользователя. Введённые данные для расчётов не передаются на серверы Оператора и не покидают устройство.", en: "4.1. All calculations are performed locally on the User's device. The entered data for calculations is not transmitted to the Operator's servers and does not leave the device.", zh: "4.1. 所有计算均在用户设备上本地进行。输入的计算数据不会传输到运营商的服务器，也不会离开设备。" },
-            s4_2: { ru: "4.2. Для сбора аналитики и показа рекламы могут использоваться сторонние сервисы: Яндекс.Метрика, ВКонтакте (VK SDK), Huawei Mobile Services (HMS Core).", en: "4.2. Third-party services may be used to collect analytics and display advertising: Yandex.Metrica, VKontakte (VK SDK), Huawei Mobile Services (HMS Core).", zh: "4.2. 可能使用第三方服务收集分析和展示广告：Yandex.Metrica、VKontakte（VK SDK）、华为移动服务（HMS Core）。" },
-            
-            s5_title: { ru: "5. КОНТАКТНАЯ ИНФОРМАЦИЯ", en: "5. CONTACT INFORMATION", zh: "5. 联系信息" },
-            s5_1: { ru: "5.1. По всем вопросам, связанным с обработкой персональных данных, вы можете обратиться к Оператору:", en: "5.1. For all questions related to the processing of personal data, you can contact the Operator:", zh: "5.1. 如有任何与个人数据处理相关的问题，您可以联系运营商：" },
-            contact: { ru: "Контакты для связи", en: "Contact information", zh: "联系信息" }
+    // ==================== ПОЛНЫЕ ПЕРЕВОДЫ ДЛЯ ВСЕХ ТРЁХ ЯЗЫКОВ ====================
+    const content = {
+        ru: {
+            appName: "Мастер-колорист",
+            privacyTab: "Политика конфиденциальности",
+            eulaTab: "Лицензионное соглашение",
+            lastUpdated: "Дата последнего обновления:",
+            copyright: "Все права защищены.",
+            author: "Чигракова Анастасия Сергеевна",
+            privacy: {
+                title: "ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ",
+                sections: [
+                    { title: "1. ОБЩИЕ ПОЛОЖЕНИЯ", content: [
+                        "1.1. Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных пользователей мобильного приложения «Мастер-колорист» («Приложение»), разработанного Чиграковой Анастасией Сергеевной («Оператор»).",
+                        "1.2. Оператор обязуется соблюдать конфиденциальность персональных данных Пользователя в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».",
+                        "1.3. Используя Приложение, Пользователь выражает своё согласие с условиями настоящей Политики."
+                    ]},
+                    { title: "2. КАКИЕ ДАННЫЕ МЫ СОБИРАЕМ", content: [
+                        "2.1. Приложение «Мастер-колорист» разработано с минимальным сбором данных. Мы собираем только ту информацию, которая необходима для функционирования Приложения:",
+                        "• Технические данные устройства: тип и версия ОС, модель устройства, уникальный идентификатор, версия Приложения",
+                        "• Данные для расчётов: тип волос, текущий и желаемый цвет, длина волос, процент седины, выбранный бренд краски",
+                        "• Данные об использовании: частота использования функций, продолжительность сессий, информация об ошибках",
+                        "2.2. Приложение НЕ собирает и НЕ передаёт: фотографии, геолокацию, контактную информацию, данные платёжных карт."
+                    ]},
+                    { title: "3. ЦЕЛИ СБОРА ДАННЫХ", content: [
+                        "3.1. Собранные данные используются исключительно для следующих целей:",
+                        "• Обеспечения корректной работы Приложения и выполнения расчётов",
+                        "• Улучшения функциональности и пользовательского опыта",
+                        "• Анализа использования Приложения через сервисы аналитики",
+                        "• Показа релевантной рекламы для монетизации бесплатной версии",
+                        "• Выявления и устранения ошибок, технических проблем"
+                    ]},
+                    { title: "4. ОБРАБОТКА И ХРАНЕНИЕ ДАННЫХ", content: [
+                        "4.1. Все расчёты производятся локально на устройстве Пользователя. Введённые данные для расчётов не передаются на серверы Оператора.",
+                        "4.2. Для сбора аналитики и показа рекламы используются сторонние сервисы: Яндекс.Метрика, ВКонтакте (VK SDK), Huawei Mobile Services."
+                    ]},
+                    { title: "5. КОНТАКТНАЯ ИНФОРМАЦИЯ", content: [
+                        "5.1. По всем вопросам, связанным с обработкой персональных данных, вы можете обратиться к Оператору:"
+                    ]}
+                ]
+            },
+            eula: {
+                title: "ЛИЦЕНЗИОННОЕ СОГЛАШЕНИЕ",
+                sections: [
+                    { title: "1. ОБЩИЕ ПОЛОЖЕНИЯ", content: [
+                        "1.1. Настоящее Лицензионное соглашение с конечным пользователем («Соглашение») является юридически обязательным договором между вами, физическим лицом («Пользователь»), и разработчиком приложения «Мастер-колорист» («Правообладатель»).",
+                        "1.2. Скачивая, устанавливая, запуская или используя Приложение любым способом, вы подтверждаете, что прочитали, поняли и безоговорочно принимаете все условия настоящего Соглашения.",
+                        "1.3. Если вы не согласны с условиями настоящего Соглашения, вы не имеете права использовать Приложение и должны немедленно удалить его со своего устройства."
+                    ]},
+                    { title: "2. ЛИЦЕНЗИЯ", content: [
+                        "2.1. Правообладатель предоставляет вам ограниченную, непередаваемую, неисключительную, отзывную лицензию на установку и запуск Приложения на мобильном устройстве для личных некоммерческих целей."
+                    ]},
+                    { title: "3. ОГРАНИЧЕНИЯ И ЗАПРЕТЫ", content: [
+                        "3.1. Вы не имеете права:",
+                        "• копировать, модифицировать, создавать производные работы, декомпилировать, дизассемблировать Приложение;",
+                        "• удалять, скрывать или изменять любые уведомления об авторских правах;",
+                        "• использовать Приложение в коммерческих целях;",
+                        "• распространять, лицензировать, передавать, продавать, сдавать в аренду Приложение."
+                    ]},
+                    { title: "4. ПРОФЕССИОНАЛЬНЫЙ ХАРАКТЕР ИНФОРМАЦИИ", content: [
+                        "4.1. Приложение предоставляет расчеты и рекомендации на основе алгоритмов, учитывающих профессиональные принципы колористики. Однако Приложение НЕ является заменой профессиональной консультации лицензированного парикмахера-колориста.",
+                        "4.2. Все расчеты носят рекомендательный характер. Правообладатель не гарантирует точность, полноту или применимость расчетов для конкретного случая.",
+                        "4.3. Перед применением любого красителя или тонирующего средства Пользователь обязан самостоятельно провести тест на аллергию в соответствии с инструкцией производителя."
+                    ]},
+                    { title: "5. ОТКАЗ ОТ ГАРАНТИЙ И ОГРАНИЧЕНИЕ ОТВЕТСТВЕННОСТИ", content: [
+                        "5.1. Приложение предоставляется «как есть». Правообладатель не несет ответственности за любые косвенные, случайные, специальные или последующие убытки, возникшие в связи с использованием или невозможностью использования Приложения."
+                    ]},
+                    { title: "6. КОНТАКТНАЯ ИНФОРМАЦИЯ", content: [
+                        "6.1. По всем вопросам, связанным с использованием Приложения, вы можете обращаться:"
+                    ]}
+                ]
+            }
         },
-        
-        // EULA content
-        eula: {
-            title: { ru: "ЛИЦЕНЗИОННОЕ СОГЛАШЕНИЕ", en: "LICENSE AGREEMENT", zh: "许可协议" },
-            s1_title: { ru: "1. ОБЩИЕ ПОЛОЖЕНИЯ", en: "1. GENERAL PROVISIONS", zh: "1. 总则" },
-            s1_1: { ru: "1.1. Настоящее Лицензионное соглашение с конечным пользователем («Соглашение») является юридически обязательным договором между вами, физическим лицом («Пользователь»), и разработчиком приложения «Мастер-колорист» («Правообладатель»).", en: "1.1. This End User License Agreement ('Agreement') is a legally binding contract between you, an individual ('User'), and the developer of the 'Hair Colorist' application ('Rightholder').", zh: "1.1. 本最终用户许可协议（'协议'）是您（个人，'用户'）与'染发专家'应用程序开发者（'权利人'）之间具有法律约束力的合同。" },
-            s1_2: { ru: "1.2. Скачивая, устанавливая, запуская или используя Приложение любым способом, вы подтверждаете, что прочитали, поняли и безоговорочно принимаете все условия настоящего Соглашения.", en: "1.2. By downloading, installing, launching or using the Application in any way, you confirm that you have read, understood and unconditionally accept all the terms of this Agreement.", zh: "1.2. 下载、安装、启动或以任何方式使用应用程序，即表示您确认已阅读、理解并无条件接受本协议的所有条款。" },
-            s1_3: { ru: "1.3. Если вы не согласны с условиями настоящего Соглашения, вы не имеете права использовать Приложение и должны немедленно удалить его со своего устройства.", en: "1.3. If you do not agree to the terms of this Agreement, you are not entitled to use the Application and must immediately delete it from your device.", zh: "1.3. 如果您不同意本协议的条款，您无权使用该应用程序，必须立即将其从设备中删除。" },
-            
-            s2_title: { ru: "2. ЛИЦЕНЗИЯ", en: "2. LICENSE", zh: "2. 许可" },
-            s2_1: { ru: "2.1. Правообладатель предоставляет вам ограниченную, непередаваемую, неисключительную, отзывную лицензию на установку и запуск Приложения на мобильном устройстве для личных некоммерческих целей.", en: "2.1. The Rightholder grants you a limited, non-transferable, non-exclusive, revocable license to install and run the Application on a mobile device for personal non-commercial purposes.", zh: "2.1. 权利人授予您有限的、不可转让的、非排他性的、可撤销的许可，允许在移动设备上安装和运行应用程序，用于个人非商业目的。" },
-            
-            s3_title: { ru: "3. ОГРАНИЧЕНИЯ И ЗАПРЕТЫ", en: "3. RESTRICTIONS AND PROHIBITIONS", zh: "3. 限制和禁止" },
-            s3_items: { ru: "копировать, модифицировать, создавать производные работы, декомпилировать, дизассемблировать Приложение; удалять, скрывать или изменять любые уведомления об авторских правах; использовать Приложение в коммерческих целях; распространять, лицензировать, передавать, продавать, сдавать в аренду Приложение.", en: "copy, modify, create derivative works, decompile, disassemble the Application; remove, hide or alter any copyright notices; use the Application for commercial purposes; distribute, license, transfer, sell, rent the Application.", zh: "复制、修改、创建衍生作品、反编译、反汇编应用程序；删除、隐藏或更改任何版权声明；将应用程序用于商业目的；分发、许可、转让、出售、出租应用程序。" },
-            
-            s4_title: { ru: "4. ПРОФЕССИОНАЛЬНЫЙ ХАРАКТЕР ИНФОРМАЦИИ", en: "4. PROFESSIONAL NATURE OF INFORMATION", zh: "4. 信息的专业性质" },
-            s4_1: { ru: "4.1. Приложение предоставляет расчеты и рекомендации на основе алгоритмов, учитывающих профессиональные принципы колористики. Однако Приложение НЕ является заменой профессиональной консультации лицензированного парикмахера-колориста.", en: "4.1. The Application provides calculations and recommendations based on algorithms that take into account professional colorist principles. However, the Application is NOT a substitute for professional consultation with a licensed hairdresser-colorist.", zh: "4.1. 该应用程序提供的计算和建议基于考虑专业色彩师原理的算法。但是，该应用程序不能替代持证理发师-色彩师的专业咨询。" },
-            s4_2: { ru: "4.2. Все расчеты носят рекомендательный характер. Правообладатель не гарантирует точность, полноту или применимость расчетов для конкретного случая.", en: "4.2. All calculations are for reference only. The Rightholder does not guarantee the accuracy, completeness or applicability of the calculations for a specific case.", zh: "4.2. 所有计算仅供参考。权利人不保证计算的准确性、完整性或对特定情况的适用性。" },
-            s4_3: { ru: "4.3. Перед применением любого красителя или тонирующего средства Пользователь обязан самостоятельно провести тест на аллергию в соответствии с инструкцией производителя.", en: "4.3. Before using any dye or tinting agent, the User is obliged to independently perform an allergy test in accordance with the manufacturer's instructions.", zh: "4.3. 在使用任何染发剂或着色剂之前，用户有义务根据制造商的说明自行进行过敏测试。" },
-            
-            s5_title: { ru: "5. ОТКАЗ ОТ ГАРАНТИЙ И ОГРАНИЧЕНИЕ ОТВЕТСТВЕННОСТИ", en: "5. DISCLAIMER OF WARRANTIES AND LIMITATION OF LIABILITY", zh: "5. 免责声明和责任限制" },
-            s5_1: { ru: "5.1. Приложение предоставляется «как есть». Правообладатель не несет ответственности за любые косвенные, случайные, специальные или последующие убытки, возникшие в связи с использованием или невозможностью использования Приложения.", en: "5.1. The Application is provided 'as is'. The Rightholder shall not be liable for any indirect, incidental, special or consequential damages arising out of the use or inability to use the Application.", zh: "5.1. 应用程序按'原样'提供。权利人对因使用或无法使用应用程序而引起的任何间接、附带、特殊或后果性损害不承担责任。" },
-            
-            s6_title: { ru: "6. КОНТАКТНАЯ ИНФОРМАЦИЯ", en: "6. CONTACT INFORMATION", zh: "6. 联系信息" },
-            contact_title: { ru: "Контакты для связи", en: "Contact information", zh: "联系信息" }
+        en: {
+            appName: "Hair Colorist",
+            privacyTab: "Privacy Policy",
+            eulaTab: "License Agreement",
+            lastUpdated: "Last updated:",
+            copyright: "All rights reserved.",
+            author: "Anastasia Chigrakova",
+            privacy: {
+                title: "PRIVACY POLICY",
+                sections: [
+                    { title: "1. GENERAL PROVISIONS", content: [
+                        "1.1. This Privacy Policy defines the procedure for processing and protecting personal data of users of the mobile application 'Hair Colorist' ('Application'), developed by Anastasia Chigrakova ('Operator').",
+                        "1.2. The Operator undertakes to maintain the confidentiality of the User's personal data in accordance with Federal Law No. 152-FZ of July 27, 2006 'On Personal Data'.",
+                        "1.3. By using the Application, the User expresses their consent to the terms of this Policy."
+                    ]},
+                    { title: "2. WHAT DATA WE COLLECT", content: [
+                        "2.1. The Hair Colorist application is designed with minimal data collection. We only collect information that is necessary for the Application to function:",
+                        "• Device technical data: OS type and version, device model, unique identifier, Application version",
+                        "• Data entered for calculations: hair type, current and desired color, hair length, gray hair percentage, selected dye brand",
+                        "• Usage data: frequency of feature use, session duration, error information",
+                        "2.2. The application does NOT collect or transfer: photos, geolocation, contact information, payment card data."
+                    ]},
+                    { title: "3. PURPOSES OF DATA COLLECTION", content: [
+                        "3.1. The collected data is used exclusively for the following purposes:",
+                        "• Ensuring the correct operation of the Application and performing calculations",
+                        "• Improving functionality and user experience",
+                        "• Analyzing the use of the Application through analytics services",
+                        "• Showing relevant advertising to monetize the free version",
+                        "• Identifying and fixing errors and technical problems"
+                    ]},
+                    { title: "4. DATA PROCESSING AND STORAGE", content: [
+                        "4.1. All calculations are performed locally on the User's device. The entered data for calculations is not transmitted to the Operator's servers.",
+                        "4.2. Third-party services may be used to collect analytics and display advertising: Yandex.Metrica, VKontakte (VK SDK), Huawei Mobile Services."
+                    ]},
+                    { title: "5. CONTACT INFORMATION", content: [
+                        "5.1. For all questions related to the processing of personal data, you can contact the Operator:"
+                    ]}
+                ]
+            },
+            eula: {
+                title: "LICENSE AGREEMENT",
+                sections: [
+                    { title: "1. GENERAL PROVISIONS", content: [
+                        "1.1. This End User License Agreement ('Agreement') is a legally binding contract between you, an individual ('User'), and the developer of the 'Hair Colorist' application ('Rightholder').",
+                        "1.2. By downloading, installing, launching or using the Application in any way, you confirm that you have read, understood and unconditionally accept all the terms of this Agreement.",
+                        "1.3. If you do not agree to the terms of this Agreement, you are not entitled to use the Application and must immediately delete it from your device."
+                    ]},
+                    { title: "2. LICENSE", content: [
+                        "2.1. The Rightholder grants you a limited, non-transferable, non-exclusive, revocable license to install and run the Application on a mobile device for personal non-commercial purposes."
+                    ]},
+                    { title: "3. RESTRICTIONS AND PROHIBITIONS", content: [
+                        "3.1. You are not entitled to:",
+                        "• copy, modify, create derivative works, decompile, disassemble the Application;",
+                        "• remove, hide or alter any copyright notices;",
+                        "• use the Application for commercial purposes;",
+                        "• distribute, license, transfer, sell, rent the Application."
+                    ]},
+                    { title: "4. PROFESSIONAL NATURE OF INFORMATION", content: [
+                        "4.1. The Application provides calculations and recommendations based on algorithms that take into account professional colorist principles. However, the Application is NOT a substitute for professional consultation with a licensed hairdresser-colorist.",
+                        "4.2. All calculations are for reference only. The Rightholder does not guarantee the accuracy, completeness or applicability of the calculations for a specific case.",
+                        "4.3. Before using any dye or tinting agent, the User is obliged to independently perform an allergy test in accordance with the manufacturer's instructions."
+                    ]},
+                    { title: "5. DISCLAIMER OF WARRANTIES AND LIMITATION OF LIABILITY", content: [
+                        "5.1. The Application is provided 'as is'. The Rightholder shall not be liable for any indirect, incidental, special or consequential damages arising out of the use or inability to use the Application."
+                    ]},
+                    { title: "6. CONTACT INFORMATION", content: [
+                        "6.1. For all questions related to the use of the Application, you can contact:"
+                    ]}
+                ]
+            }
+        },
+        zh: {
+            appName: "染发专家",
+            privacyTab: "隐私政策",
+            eulaTab: "许可协议",
+            lastUpdated: "最后更新:",
+            copyright: "保留所有权利。",
+            author: "阿纳斯塔西娅·奇格拉科娃",
+            privacy: {
+                title: "隐私政策",
+                sections: [
+                    { title: "1. 总则", content: [
+                        "1.1. 本隐私政策规定了由阿纳斯塔西娅·奇格拉科娃（'运营商'）开发的移动应用程序'染发专家'（'应用程序'）用户个人数据的处理和保护程序。",
+                        "1.2. 运营商承诺根据2006年7月27日第152-FZ号联邦法律'关于个人数据'对用户的个人数据保密。",
+                        "1.3. 使用应用程序即表示用户同意本政策的条款。"
+                    ]},
+                    { title: "2. 我们收集哪些数据", content: [
+                        "2.1. 染发专家应用程序设计为最小化数据收集。我们只收集应用程序运行所必需的信息：",
+                        "• 设备技术数据：操作系统类型和版本、设备型号、唯一标识符、应用程序版本",
+                        "• 用于计算的数据：头发类型、当前和期望颜色、头发长度、白发百分比、选择的染发剂品牌",
+                        "• 使用数据：功能使用频率、会话时长、错误信息",
+                        "2.2. 应用程序不收集也不传输：照片、地理位置、联系信息、支付卡数据。"
+                    ]},
+                    { title: "3. 数据收集目的", content: [
+                        "3.1. 收集的数据仅用于以下目的：",
+                        "• 确保应用程序正常运行和执行计算",
+                        "• 改进功能和用户体验",
+                        "• 通过分析服务分析应用程序的使用情况",
+                        "• 展示相关广告以实现免费版本的盈利",
+                        "• 识别和修复错误及技术问题"
+                    ]},
+                    { title: "4. 数据处理和存储", content: [
+                        "4.1. 所有计算均在用户设备上本地进行。输入的计算数据不会传输到运营商的服务器。",
+                        "4.2. 可能使用第三方服务收集分析和展示广告：Yandex.Metrica、VKontakte（VK SDK）、华为移动服务。"
+                    ]},
+                    { title: "5. 联系信息", content: [
+                        "5.1. 如有任何与个人数据处理相关的问题，您可以联系运营商："
+                    ]}
+                ]
+            },
+            eula: {
+                title: "许可协议",
+                sections: [
+                    { title: "1. 总则", content: [
+                        "1.1. 本最终用户许可协议（'协议'）是您（个人，'用户'）与'染发专家'应用程序开发者（'权利人'）之间具有法律约束力的合同。",
+                        "1.2. 下载、安装、启动或以任何方式使用应用程序，即表示您确认已阅读、理解并无条件接受本协议的所有条款。",
+                        "1.3. 如果您不同意本协议的条款，您无权使用该应用程序，必须立即将其从设备中删除。"
+                    ]},
+                    { title: "2. 许可", content: [
+                        "2.1. 权利人授予您有限的、不可转让的、非排他性的、可撤销的许可，允许在移动设备上安装和运行应用程序，用于个人非商业目的。"
+                    ]},
+                    { title: "3. 限制和禁止", content: [
+                        "3.1. 您无权：",
+                        "• 复制、修改、创建衍生作品、反编译、反汇编应用程序；",
+                        "• 删除、隐藏或更改任何版权声明；",
+                        "• 将应用程序用于商业目的；",
+                        "• 分发、许可、转让、出售、出租应用程序。"
+                    ]},
+                    { title: "4. 信息的专业性质", content: [
+                        "4.1. 该应用程序提供的计算和建议基于考虑专业色彩师原理的算法。但是，该应用程序不能替代持证理发师-色彩师的专业咨询。",
+                        "4.2. 所有计算仅供参考。权利人不保证计算的准确性、完整性或对特定情况的适用性。",
+                        "4.3. 在使用任何染发剂或着色剂之前，用户有义务根据制造商的说明自行进行过敏测试。"
+                    ]},
+                    { title: "5. 免责声明和责任限制", content: [
+                        "5.1. 应用程序按'原样'提供。权利人对因使用或无法使用应用程序而引起的任何间接、附带、特殊或后果性损害不承担责任。"
+                    ]},
+                    { title: "6. 联系信息", content: [
+                        "6.1. 如有任何与使用应用程序相关的问题，您可以联系："
+                    ]}
+                ]
+            }
         }
     };
     
     function renderContent() {
         const container = document.getElementById('doc-content');
-        if (currentTab === 'privacy') {
-            container.innerHTML = `
-                <div class="privacy-card">
-                    <h1 class="doc-title"><i class="fas fa-shield-alt"></i> <span class="doc-title-text">${translations.privacy.title[currentLang]}</span></h1>
-                    
-                    <div class="section"><h2><i class="fas fa-info-circle"></i> <span class="section-title">${translations.privacy.s1_title[currentLang]}</span></h2>
-                    <p>${translations.privacy.s1_1[currentLang]}</p>
-                    <p>${translations.privacy.s1_2[currentLang]}</p>
-                    <p>${translations.privacy.s1_3[currentLang]}</p></div>
-                    
-                    <div class="section"><h2><i class="fas fa-database"></i> <span class="section-title">${translations.privacy.s2_title[currentLang]}</span></h2>
-                    <p>${translations.privacy.s2_1[currentLang]}</p>
-                    <ul><li><strong>${translations.privacy.s2_tech[currentLang]}</strong> ${translations.privacy.s2_tech_items[currentLang]}</li>
-                    <li><strong>${translations.privacy.s2_calc[currentLang]}</strong> ${translations.privacy.s2_calc_items[currentLang]}</li></ul>
-                    <div class="highlight-box"><p><strong>${translations.privacy.s2_not_collect[currentLang]}</strong> ${translations.privacy.s2_not_items[currentLang]}</p></div></div>
-                    
-                    <div class="section"><h2><i class="fas fa-bullseye"></i> <span class="section-title">${translations.privacy.s3_title[currentLang]}</span></h2>
-                    <p>${translations.privacy.s3_1[currentLang]}</p>
-                    <ul>${translations.privacy.s3_items[currentLang].split(';').map(i => `<li>${i.trim()}</li>`).join('')}</ul></div>
-                    
-                    <div class="section"><h2><i class="fas fa-server"></i> <span class="section-title">${translations.privacy.s4_title[currentLang]}</span></h2>
-                    <p>${translations.privacy.s4_1[currentLang]}</p>
-                    <p>${translations.privacy.s4_2[currentLang]}</p></div>
-                    
-                    <div class="section"><h2><i class="fas fa-address-card"></i> <span class="section-title">${translations.privacy.s5_title[currentLang]}</span></h2>
-                    <p>${translations.privacy.s5_1[currentLang]}</p>
-                    <div class="contact-block"><h3><i class="fas fa-envelope"></i> ${translations.privacy.contact[currentLang]}</h3>
-                    <div class="contact-email"><i class="far fa-envelope"></i> meledy11@yandex.ru</div></div></div>
-                </div>
-            `;
-        } else {
-            container.innerHTML = `
-                <div class="privacy-card">
-                    <h1 class="doc-title"><i class="fas fa-file-contract"></i> <span class="doc-title-text">${translations.eula.title[currentLang]}</span></h1>
-                    
-                    <div class="section"><h2><i class="fas fa-gavel"></i> <span class="section-title">${translations.eula.s1_title[currentLang]}</span></h2>
-                    <p>${translations.eula.s1_1[currentLang]}</p>
-                    <p>${translations.eula.s1_2[currentLang]}</p>
-                    <p>${translations.eula.s1_3[currentLang]}</p></div>
-                    
-                    <div class="section"><h2><i class="fas fa-laptop-code"></i> <span class="section-title">${translations.eula.s2_title[currentLang]}</span></h2>
-                    <p>${translations.eula.s2_1[currentLang]}</p></div>
-                    
-                    <div class="section"><h2><i class="fas fa-ban"></i> <span class="section-title">${translations.eula.s3_title[currentLang]}</span></h2>
-                    <ul>${translations.eula.s3_items[currentLang].split(';').map(i => `<li>${i.trim()}</li>`).join('')}</ul></div>
-                    
-                    <div class="section"><h2><i class="fas fa-exclamation-triangle"></i> <span class="section-title">${translations.eula.s4_title[currentLang]}</span></h2>
-                    <p>${translations.eula.s4_1[currentLang]}</p>
-                    <p>${translations.eula.s4_2[currentLang]}</p>
-                    <div class="highlight-box"><p><strong>⚠️ ${translations.eula.s4_3[currentLang]}</strong></p></div></div>
-                    
-                    <div class="section"><h2><i class="fas fa-balance-scale"></i> <span class="section-title">${translations.eula.s5_title[currentLang]}</span></h2>
-                    <p>${translations.eula.s5_1[currentLang]}</p></div>
-                    
-                    <div class="section"><h2><i class="fas fa-address-card"></i> <span class="section-title">${translations.eula.s6_title[currentLang]}</span></h2>
-                    <div class="contact-block"><h3><i class="fas fa-envelope"></i> ${translations.eula.contact_title[currentLang]}</h3>
-                    <div class="contact-email"><i class="far fa-envelope"></i> meledy11@yandex.ru</div></div></div>
-                </div>
-            `;
+        const data = content[currentLang];
+        const docType = currentTab === 'privacy' ? data.privacy : data.eula;
+        
+        let html = `<div class="privacy-card">
+            <h1 class="doc-title"><i class="${currentTab === 'privacy' ? 'fas fa-shield-alt' : 'fas fa-file-contract'}"></i> ${docType.title}</h1>`;
+        
+        for (const section of docType.sections) {
+            html += `<div class="section">
+                <h2><i class="fas ${currentTab === 'privacy' ? 'fa-info-circle' : 'fa-gavel'}"></i> ${section.title}</h2>`;
+            for (const line of section.content) {
+                if (line.startsWith('•')) {
+                    html += `<ul><li>${line.substring(2)}</li></ul>`;
+                } else {
+                    html += `<p>${line}</p>`;
+                }
+            }
+            html += `</div>`;
         }
+        
+        html += `<div class="section">
+            <div class="contact-block">
+                <h3><i class="fas fa-envelope"></i> ${currentLang === 'ru' ? 'Контакты для связи' : (currentLang === 'en' ? 'Contact information' : '联系信息')}</h3>
+                <div class="contact-email"><i class="far fa-envelope"></i> meledy11@yandex.ru</div>
+            </div>
+        </div></div>`;
+        
+        container.innerHTML = html;
     }
     
     function updateUI() {
-        document.getElementById('app-name').textContent = translations.appName[currentLang];
-        document.getElementById('footer-name').textContent = translations.appName[currentLang];
-        document.getElementById('tab-privacy-text').textContent = translations.privacyTab[currentLang];
-        document.getElementById('tab-eula-text').textContent = translations.eulaTab[currentLang];
-        document.getElementById('last-updated-text').textContent = translations.lastUpdated[currentLang];
-        document.getElementById('copyright-text').textContent = translations.copyright[currentLang];
-        document.getElementById('author-name').textContent = translations.author[currentLang];
+        document.getElementById('app-name').textContent = content[currentLang].appName;
+        document.getElementById('footer-name').textContent = content[currentLang].appName;
+        document.getElementById('tab-privacy-text').textContent = content[currentLang].privacyTab;
+        document.getElementById('tab-eula-text').textContent = content[currentLang].eulaTab;
+        document.getElementById('last-updated-text').textContent = content[currentLang].lastUpdated;
+        document.getElementById('copyright-text').textContent = content[currentLang].copyright;
+        document.getElementById('author-name').textContent = content[currentLang].author;
         renderContent();
     }
     
@@ -361,4 +480,33 @@
             document.body.classList.add('dark-theme');
             themeIcon.className = 'fas fa-sun';
         }
-       
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            const isDark = document.body.classList.contains('dark-theme');
+            themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        setCurrentDate();
+        setupTheme();
+        
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+        });
+        
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => setTab(btn.dataset.tab));
+        });
+        
+        const savedLang = localStorage.getItem('preferredLanguage');
+        if (savedLang && ['ru', 'en', 'zh'].includes(savedLang)) {
+            setLanguage(savedLang);
+        } else {
+            setLanguage('ru');
+        }
+    });
+</script>
+</body>
+</html>
