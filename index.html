@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* ===== ПЕРЕМЕННЫЕ И БАЗОВЫЕ СТИЛИ ===== */
         :root {
             --primary-color: #e8b4b4;
             --primary-dark: #c28b8b;
@@ -25,7 +24,6 @@
             --border-color-dark: #404040;
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             --radius: 20px;
-            --tab-inactive: #f0e4e0;
         }
         
         * {
@@ -49,7 +47,6 @@
             --text-color: var(--text-color-dark);
             --text-light: #bbbbbb;
             --border-color: var(--border-color-dark);
-            --tab-inactive: #3a3a3a;
         }
         
         .container {
@@ -58,7 +55,6 @@
             padding: 20px;
         }
         
-        /* ===== ШАПКА ===== */
         .header {
             text-align: center;
             padding: 30px 0 20px;
@@ -106,7 +102,6 @@
             margin-top: 5px;
         }
         
-        /* ===== ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКОВ ===== */
         .language-switcher {
             display: flex;
             justify-content: center;
@@ -150,7 +145,6 @@
             color: white;
         }
         
-        /* ===== ВКЛАДКИ ===== */
         .tabs {
             display: flex;
             gap: 10px;
@@ -190,14 +184,12 @@
             background: rgba(232, 180, 180, 0.1);
         }
         
-        /* ===== ОСНОВНОЙ КОНТЕНТ ===== */
         .privacy-card {
             background: var(--card-bg);
             border-radius: var(--radius);
             padding: 40px;
             box-shadow: var(--shadow);
             border: 1px solid var(--border-color);
-            transition: all 0.2s;
         }
         
         .doc-title {
@@ -259,24 +251,6 @@
             margin: 20px 0;
         }
         
-        .data-list {
-            list-style: none;
-            margin-left: 0 !important;
-        }
-        
-        .data-list li {
-            padding-left: 25px;
-            position: relative;
-        }
-        
-        .data-list li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--primary-dark);
-            font-weight: bold;
-        }
-        
         .contact-block {
             background: linear-gradient(135deg, rgba(232, 180, 180, 0.1), rgba(194, 139, 139, 0.05));
             border-radius: 15px;
@@ -303,7 +277,6 @@
             color: var(--primary-color);
         }
         
-        /* ===== ПОДВАЛ ===== */
         .footer {
             text-align: center;
             padding: 30px 0 20px;
@@ -313,7 +286,6 @@
             border-top: 1px solid var(--border-color);
         }
         
-        /* ===== ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ ===== */
         .theme-toggle {
             position: fixed;
             bottom: 25px;
@@ -341,7 +313,6 @@
             color: var(--text-color);
         }
         
-        /* ===== АДАПТИВНОСТЬ ===== */
         @media (max-width: 768px) {
             .privacy-card {
                 padding: 25px;
@@ -351,10 +322,6 @@
             }
             .logo-text {
                 font-size: 26px;
-            }
-            .logo-icon {
-                width: 50px;
-                height: 50px;
             }
             .tab-btn {
                 padding: 8px 18px;
@@ -369,272 +336,327 @@
             .privacy-card {
                 padding: 20px;
             }
-            .section h2 {
-                font-size: 18px;
-            }
-            .tabs {
-                justify-content: center;
-            }
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- Переключатель темы -->
     <div class="theme-toggle" id="theme-toggle">
         <i class="fas fa-moon" id="theme-icon"></i>
     </div>
 
-    <!-- Шапка -->
     <header class="header">
         <div class="logo">
             <div class="logo-icon">
                 <i class="fas fa-palette"></i>
             </div>
-            <h1 class="logo-text" id="app-name-main">Мастер-колорист</h1>
+            <h1 class="logo-text" id="app-name">Мастер-колорист</h1>
         </div>
 
-        <!-- Переключатель языков -->
         <div class="language-switcher">
             <button class="lang-btn active" data-lang="ru"><i class="fas fa-language"></i> Русский</button>
             <button class="lang-btn" data-lang="en"><i class="fas fa-language"></i> English</button>
             <button class="lang-btn" data-lang="zh"><i class="fas fa-language"></i> 中文</button>
         </div>
 
-        <div class="last-updated" id="last-updated">
+        <div class="last-updated">
             <i class="far fa-calendar-alt"></i>
-            <span data-lang-ru="Дата последнего обновления:" data-lang-en="Last updated:" data-lang-zh="最后更新:">Дата последнего обновления:</span>
+            <span id="last-updated-text">Дата последнего обновления:</span>
             <span id="current-date">19 февраля 2026 г.</span>
         </div>
     </header>
 
-    <!-- Вкладки -->
     <div class="tabs">
-        <button class="tab-btn active" data-tab="privacy"><i class="fas fa-shield-alt"></i> <span data-lang-ru="Политика конфиденциальности" data-lang-en="Privacy Policy" data-lang-zh="隐私政策">Политика конфиденциальности</span></button>
-        <button class="tab-btn" data-tab="eula"><i class="fas fa-file-contract"></i> <span data-lang-ru="Лицензионное соглашение" data-lang-en="License Agreement" data-lang-zh="许可协议">Лицензионное соглашение</span></button>
+        <button class="tab-btn active" data-tab="privacy"><i class="fas fa-shield-alt"></i> <span id="tab-privacy-text">Политика конфиденциальности</span></button>
+        <button class="tab-btn" data-tab="eula"><i class="fas fa-file-contract"></i> <span id="tab-eula-text">Лицензионное соглашение</span></button>
     </div>
 
-    <!-- Контейнер для динамического контента -->
     <div id="doc-content"></div>
 
-    <!-- Подвал -->
     <footer class="footer">
-        <p>© <span id="current-year">2026</span> <span id="app-name-footer">Мастер-колорист</span>. <span data-lang-ru="Все права защищены." data-lang-en="All rights reserved." data-lang-zh="保留所有权利。">Все права защищены.</span></p>
-        <p style="margin-top: 5px;" data-lang-ru="Чигракова Анастасия Сергеевна" data-lang-en="Anastasia Chigrakova" data-lang-zh="Anastasia Chigrakova">Чигракова Анастасия Сергеевна</p>
+        <p>© <span id="current-year">2026</span> <span id="footer-name">Мастер-колорист</span>. <span id="copyright-text">Все права защищены.</span></p>
+        <p id="author-name">Чигракова Анастасия Сергеевна</p>
     </footer>
 </div>
 
 <script>
-    // Данные для многоязычности: русский (ru), английский (en), китайский (zh)
-    const translations = {
-        appName: { ru: "Мастер-колорист", en: "Hair Colorist", zh: "染发专家" },
-        privacy: { ru: "ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ", en: "PRIVACY POLICY", zh: "隐私政策" },
-        eulaTitle: { ru: "ЛИЦЕНЗИОННОЕ СОГЛАШЕНИЕ", en: "LICENSE AGREEMENT", zh: "许可协议" }
-    };
-
-    // полный HTML для Политики конфиденциальности (мультиязычный через атрибуты)
-    const privacyHTML = `
-        <div class="privacy-card" id="privacy-card">
-            <h1 class="doc-title"><i class="fas fa-shield-alt"></i> <span class="doc-title-text" data-lang-ru="ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ" data-lang-en="PRIVACY POLICY" data-lang-zh="隐私政策">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</span></h1>
-            ${generatePrivacySections()}
-        </div>
-    `;
-
-    // полный HTML для Лицензионного соглашения (EULA) — полная версия из запроса
-    const eulaHTML = `
-        <div class="privacy-card" id="eula-card">
-            <h1 class="doc-title"><i class="fas fa-file-contract"></i> <span class="doc-title-text" data-lang-ru="ЛИЦЕНЗИОННОЕ СОГЛАШЕНИЕ" data-lang-en="LICENSE AGREEMENT" data-lang-zh="许可协议">ЛИЦЕНЗИОННОЕ СОГЛАШЕНИЕ</span></h1>
-            ${generateEulaSections()}
-        </div>
-    `;
-
-    function generatePrivacySections() {
-        return `
-            <section class="section"><h2><i class="fas fa-info-circle"></i> <span data-lang-ru="1. ОБЩИЕ ПОЛОЖЕНИЯ" data-lang-en="1. GENERAL PROVISIONS" data-lang-zh="1. 总则">1. ОБЩИЕ ПОЛОЖЕНИЯ</span></h2>
-            <p data-lang-ru="1.1. Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных пользователей мобильного приложения «Мастер-колорист» («Приложение»), разработанного Чиграковой Анастасией Сергеевной («Оператор»)." data-lang-en="1.1. This Privacy Policy defines the procedure for processing and protecting personal data of users of the mobile application 'Hair Colorist' ('Application'), developed by Anastasia Chigrakova ('Operator')." data-lang-zh="1.1. 本隐私政策规定了由Anastasia Chigrakova（'运营商'）开发的移动应用程序'染发专家'（'应用程序'）用户个人数据的处理和保护程序。">1.1. Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных пользователей мобильного приложения «Мастер-колорист» («Приложение»), разработанного Чиграковой Анастасией Сергеевной («Оператор»).</p>
-            <p data-lang-ru="1.2. Оператор обязуется соблюдать конфиденциальность персональных данных Пользователя в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных»." data-lang-en="1.2. The Operator undertakes to maintain the confidentiality of the User's personal data in accordance with Federal Law No. 152-FZ." data-lang-zh="1.2. 运营商承诺根据俄罗斯联邦法律对用户的个人数据保密。">1.2. Оператор обязуется соблюдать конфиденциальность персональных данных Пользователя в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».</p>
-            <p data-lang-ru="1.3. Используя Приложение, Пользователь выражает своё согласие с условиями настоящей Политики." data-lang-en="1.3. By using the Application, the User expresses their consent to the terms of this Policy." data-lang-zh="1.3. 使用应用程序即表示用户同意本政策的条款。">1.3. Используя Приложение, Пользователь выражает своё согласие с условиями настоящей Политики.</p></section>
-            
-            <section class="section"><h2><i class="fas fa-database"></i> <span data-lang-ru="2. КАКИЕ ДАННЫЕ МЫ СОБИРАЕМ" data-lang-en="2. WHAT DATA WE COLLECT" data-lang-zh="2. 我们收集哪些数据">2. КАКИЕ ДАННЫЕ МЫ СОБИРАЕМ</span></h2>
-            <p data-lang-ru="2.1. Приложение собирает минимальные данные: технические данные устройства, данные для расчётов (тип волос, цвет, длина), аналитические данные." data-lang-en="2.1. The application collects minimal data: device technical data, calculation data (hair type, color, length), analytics data." data-lang-zh="2.1. 应用程序收集最少数据：设备技术数据、计算数据（发质、颜色、长度）、分析数据。">2.1. Приложение собирает минимальные данные: технические данные устройства, данные для расчётов (тип волос, цвет, длина), аналитические данные.</p>
-            <div class="highlight-box"><p><strong data-lang-ru="2.2. Приложение НЕ собирает:" data-lang-en="2.2. The app does NOT collect:" data-lang-zh="2.2. 应用程序不收集：">2.2. Приложение НЕ собирает:</strong> <span data-lang-ru="фото, геолокацию, контакты, платежные данные." data-lang-en="photos, geolocation, contacts, payment data." data-lang-zh="照片、地理位置、联系人、支付数据。">фото, геолокацию, контакты, платежные данные.</span></p></div></section>
-            
-            <section class="section"><h2><i class="fas fa-bullseye"></i> <span data-lang-ru="3. ЦЕЛИ СБОРА ДАННЫХ" data-lang-en="3. PURPOSES" data-lang-zh="3. 目的">3. ЦЕЛИ СБОРА ДАННЫХ</span></h2>
-            <ul><li data-lang-ru="Обеспечение работы Приложения" data-lang-en="Ensuring the operation of the Application" data-lang-zh="确保应用程序运行">Обеспечение работы Приложения</li><li data-lang-ru="Улучшение функциональности" data-lang-en="Improving functionality" data-lang-zh="改进功能">Улучшение функциональности</li><li data-lang-ru="Аналитика и реклама" data-lang-en="Analytics and advertising" data-lang-zh="分析和广告">Аналитика и реклама</li></ul></section>
-            
-            <section class="section"><h2><i class="fas fa-server"></i> <span data-lang-ru="4. ХРАНЕНИЕ ДАННЫХ" data-lang-en="4. DATA STORAGE" data-lang-zh="4. 数据存储">4. ХРАНЕНИЕ ДАННЫХ</span></h2>
-            <p data-lang-ru="4.1. Расчёты производятся локально на устройстве. Для аналитики используются Яндекс.Метрика, VK SDK, Huawei Services." data-lang-en="4.1. Calculations are performed locally. Yandex.Metrica, VK SDK, Huawei Services are used for analytics." data-lang-zh="4.1. 计算在本地进行。使用Yandex.Metrica、VK SDK、华为服务进行分析。">4.1. Расчёты производятся локально на устройстве. Для аналитики используются Яндекс.Метрика, VK SDK, Huawei Services.</p></section>
-            
-            <section class="section"><h2><i class="fas fa-envelope"></i> <span data-lang-ru="КОНТАКТЫ" data-lang-en="CONTACTS" data-lang-zh="联系方式">КОНТАКТЫ</span></h2>
-            <div class="contact-block"><h3><i class="fas fa-at"></i> Email</h3><div class="contact-email"><i class="far fa-envelope"></i> meledy11@yandex.ru</div></div></section>
-        `;
-    }
-
-    function generateEulaSections() {
-        return `
-            <section class="section"><h2><i class="fas fa-gavel"></i> <span data-lang-ru="1. ОБЩИЕ ПОЛОЖЕНИЯ" data-lang-en="1. GENERAL PROVISIONS" data-lang-zh="1. 总则">1. ОБЩИЕ ПОЛОЖЕНИЯ</span></h2>
-            <p data-lang-ru="1.1. Настоящее Лицензионное соглашение является юридически обязательным договором между вами (Пользователь) и разработчиком приложения «Мастер-колорист» (Правообладатель)." data-lang-en="1.1. This License Agreement is a legally binding contract between you (User) and the developer of the 'Hair Colorist' application (Rightholder)." data-lang-zh="1.1. 本许可协议是您（用户）与'染发专家'应用程序开发者（权利人）之间具有法律约束力的合同。">1.1. Настоящее Лицензионное соглашение является юридически обязательным договором между вами (Пользователь) и разработчиком приложения «Мастер-колорист» (Правообладатель).</p>
-            <p data-lang-ru="1.2. Скачивая или используя Приложение, вы подтверждаете полное согласие с условиями Соглашения." data-lang-en="1.2. By downloading or using the Application, you confirm full acceptance of the Agreement." data-lang-zh="1.2. 下载或使用应用程序即表示您完全接受本协议。">1.2. Скачивая или используя Приложение, вы подтверждаете полное согласие с условиями Соглашения.</p></section>
-            
-            <section class="section"><h2><i class="fas fa-laptop-code"></i> <span data-lang-ru="2. ЛИЦЕНЗИЯ" data-lang-en="2. LICENSE" data-lang-zh="2. 许可">2. ЛИЦЕНЗИЯ</span></h2>
-            <p data-lang-ru="2.1. Правообладатель предоставляет ограниченную, непередаваемую, неисключительную лицензию на использование Приложения для личных некоммерческих целей." data-lang-en="2.1. The Rightholder grants a limited, non-transferable, non-exclusive license to use the Application for personal non-commercial purposes." data-lang-zh="2.1. 权利人授予有限的、不可转让的、非排他性许可，允许将应用程序用于个人非商业目的。">2.1. Правообладатель предоставляет ограниченную, непередаваемую, неисключительную лицензию на использование Приложения для личных некоммерческих целей.</p></section>
-            
-            <section class="section"><h2><i class="fas fa-ban"></i> <span data-lang-ru="3. ЗАПРЕТЫ" data-lang-en="3. RESTRICTIONS" data-lang-zh="3. 禁止事项">3. ЗАПРЕТЫ</span></h2>
-            <ul><li data-lang-ru="Запрещается копировать, модифицировать, декомпилировать Приложение." data-lang-en="Copying, modifying, decompiling the Application is prohibited." data-lang-zh="禁止复制、修改、反编译应用程序。">Запрещается копировать, модифицировать, декомпилировать Приложение.</li>
-            <li data-lang-ru="Запрещается коммерческое использование результатов расчётов без квалификации." data-lang-en="Commercial use of calculation results without qualification is prohibited." data-lang-zh="未经资格认证禁止将计算结果用于商业用途。">Запрещается коммерческое использование результатов расчётов без квалификации.</li>
-            <li data-lang-ru="Запрещается удалять уведомления об авторских правах." data-lang-en="Removing copyright notices is prohibited." data-lang-zh="禁止删除版权声明。">Запрещается удалять уведомления об авторских правах.</li></ul></section>
-            
-            <section class="section"><h2><i class="fas fa-exclamation-triangle"></i> <span data-lang-ru="4. ПРОФЕССИОНАЛЬНЫЙ ХАРАКТЕР" data-lang-en="4. PROFESSIONAL NATURE" data-lang-zh="4. 专业性质">4. ПРОФЕССИОНАЛЬНЫЙ ХАРАКТЕР</span></h2>
-            <p data-lang-ru="4.1. Приложение не заменяет профессиональную консультацию колориста. Все расчёты носят рекомендательный характер. Правообладатель не несёт ответственности за повреждение волос или аллергические реакции." data-lang-en="4.1. The Application does not replace professional advice. All calculations are for reference only. The Rightholder is not liable for hair damage or allergic reactions." data-lang-zh="4.1. 该应用程序不能替代专业色彩师咨询。所有计算仅供参考。权利人对头发损伤或过敏反应不承担责任。">4.1. Приложение не заменяет профессиональную консультацию колориста. Все расчёты носят рекомендательный характер. Правообладатель не несёт ответственности за повреждение волос или аллергические реакции.</p>
-            <div class="highlight-box"><p data-lang-ru="Перед использованием красителя обязательно проведите тест на аллергию." data-lang-en="Before using the dye, be sure to perform an allergy test." data-lang-zh="使用染发剂前务必进行过敏测试。">Перед использованием красителя обязательно проведите тест на аллергию.</p></div></section>
-            
-            <section class="section"><h2><i class="fas fa-balance-scale"></i> <span data-lang-ru="5. ОТКАЗ ОТ ГАРАНТИЙ И ОТВЕТСТВЕННОСТЬ" data-lang-en="5. DISCLAIMER OF WARRANTIES AND LIABILITY" data-lang-zh="5. 免责声明与责任限制">5. ОТКАЗ ОТ ГАРАНТИЙ И ОТВЕТСТВЕННОСТЬ</span></h2>
-            <p data-lang-ru="5.1. Приложение предоставляется «как есть». Правообладатель не гарантирует безошибочную работу. Максимальная ответственность ограничена стоимостью, уплаченной за Приложение (для бесплатной версии — 0 руб)." data-lang-en="5.1. The Application is provided 'as is'. The Rightholder does not guarantee error-free operation. Maximum liability is limited to the amount paid for the Application (for free version — 0 RUB)." data-lang-zh="5.1. 应用程序按'原样'提供。权利人不保证无错误运行。最大责任限于为应用程序支付的金额（免费版本为0元）。">5.1. Приложение предоставляется «как есть». Правообладатель не гарантирует безошибочную работу. Максимальная ответственность ограничена стоимостью, уплаченной за Приложение (для бесплатной версии — 0 руб).</p></section>
-            
-            <section class="section"><h2><i class="fas fa-address-card"></i> <span data-lang-ru="6. КОНТАКТЫ" data-lang-en="6. CONTACT" data-lang-zh="6. 联系方式">6. КОНТАКТЫ</span></h2>
-            <div class="contact-block"><h3><i class="fas fa-envelope"></i> <span data-lang-ru="Вопросы по лицензии" data-lang-en="License inquiries" data-lang-zh="许可咨询">Вопросы по лицензии</span></h3><div class="contact-email">meledy11@yandex.ru</div></div></section>
-        `;
-    }
-
+    // Текущие язык и вкладка
     let currentLang = 'ru';
     let currentTab = 'privacy';
-
-    function updateAllTexts() {
-        // обновляем название приложения в шапке и футере
-        document.getElementById('app-name-main').innerText = translations.appName[currentLang];
-        document.getElementById('app-name-footer').innerText = translations.appName[currentLang];
+    
+    // Переводы
+    const translations = {
+        appName: { ru: "Мастер-колорист", en: "Hair Colorist", zh: "染发专家" },
+        privacyTab: { ru: "Политика конфиденциальности", en: "Privacy Policy", zh: "隐私政策" },
+        eulaTab: { ru: "Лицензионное соглашение", en: "License Agreement", zh: "许可协议" },
+        lastUpdated: { ru: "Дата последнего обновления:", en: "Last updated:", zh: "最后更新:" },
+        copyright: { ru: "Все права защищены.", en: "All rights reserved.", zh: "保留所有权利。" },
+        author: { ru: "Чигракова Анастасия Сергеевна", en: "Anastasia Chigrakova", zh: "Anastasia Chigrakova" }
+    };
+    
+    // Полный HTML Политики конфиденциальности
+    function getPrivacyHTML() {
+        return `
+            <div class="privacy-card">
+                <h1 class="doc-title"><i class="fas fa-shield-alt"></i> <span class="doc-title-text">ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</span></h1>
+                
+                <div class="section">
+                    <h2><i class="fas fa-info-circle"></i> <span class="section-title-1">1. ОБЩИЕ ПОЛОЖЕНИЯ</span></h2>
+                    <p class="text-1-1">1.1. Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных пользователей мобильного приложения «Мастер-колорист» («Приложение»), разработанного Чиграковой Анастасией Сергеевной («Оператор»).</p>
+                    <p class="text-1-2">1.2. Оператор обязуется соблюдать конфиденциальность персональных данных Пользователя в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».</p>
+                    <p class="text-1-3">1.3. Используя Приложение, Пользователь выражает своё согласие с условиями настоящей Политики.</p>
+                </div>
+                
+                <div class="section">
+                    <h2><i class="fas fa-database"></i> <span class="section-title-2">2. КАКИЕ ДАННЫЕ МЫ СОБИРАЕМ</span></h2>
+                    <p class="text-2-1">2.1. Приложение «Мастер-колорист» разработано с минимальным сбором данных. Мы собираем только ту информацию, которая необходима для функционирования Приложения:</p>
+                    <ul>
+                        <li class="li-tech"><strong>Технические данные устройства:</strong> тип и версия ОС, модель устройства, уникальный идентификатор, версия Приложения</li>
+                        <li class="li-calc"><strong>Данные для расчётов:</strong> тип волос, текущий и желаемый цвет, длина волос, процент седины, выбранный бренд краски</li>
+                        <li class="li-analytics"><strong>Данные об использовании:</strong> частота использования функций, продолжительность сессий, информация об ошибках</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <p><strong>2.2. Приложение НЕ собирает и НЕ передаёт:</strong> фотографии, геолокацию, контактную информацию, данные платёжных карт.</p>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <h2><i class="fas fa-bullseye"></i> <span class="section-title-3">3. ЦЕЛИ СБОРА ДАННЫХ</span></h2>
+                    <ul>
+                        <li class="goal-1">Обеспечения корректной работы Приложения и выполнения расчётов</li>
+                        <li class="goal-2">Улучшения функциональности и пользовательского опыта</li>
+                        <li class="goal-3">Анализа использования Приложения через сервисы аналитики</li>
+                        <li class="goal-4">Показа релевантной рекламы для монетизации бесплатной версии</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h2><i class="fas fa-server"></i> <span class="section-title-4">4. ОБРАБОТКА И ХРАНЕНИЕ ДАННЫХ</span></h2>
+                    <p class="text-4-1">4.1. Все расчёты производятся локально на устройстве Пользователя. Введённые данные для расчётов не передаются на серверы Оператора.</p>
+                    <p class="text-4-2">4.2. Для сбора аналитики и показа рекламы используются сторонние сервисы: Яндекс.Метрика, ВКонтакте (VK SDK), Huawei Mobile Services.</p>
+                </div>
+                
+                <div class="section">
+                    <h2><i class="fas fa-address-card"></i> <span class="section-title-5">5. КОНТАКТНАЯ ИНФОРМАЦИЯ</span></h2>
+                    <div class="contact-block">
+                        <h3><i class="fas fa-envelope"></i> Контакты для связи</h3>
+                        <div class="contact-email">
+                            <i class="far fa-envelope"></i> meledy11@yandex.ru
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    // Полный HTML Лицензионного соглашения (EULA)
+    function getEulaHTML() {
+        return `
+            <div class="privacy-card">
+                <h1 class="doc-title"><i class="fas fa-file-contract"></i> <span class="doc-title-text">ЛИЦЕНЗИОННОЕ СОГЛАШЕНИЕ</span></h1>
+                
+                <div class="section">
+                    <h2><i class="fas fa-gavel"></i> <span class="eula-1">1. ОБЩИЕ ПОЛОЖЕНИЯ</span></h2>
+                    <p class="eula-1-1">1.1. Настоящее Лицензионное соглашение с конечным пользователем («Соглашение») является юридически обязательным договором между вами, физическим лицом («Пользователь»), и разработчиком приложения «Мастер-колорист» («Правообладатель»).</p>
+                    <p class="eula-1-2">1.2. Скачивая, устанавливая, запуская или используя Приложение любым способом, вы подтверждаете, что прочитали, поняли и безоговорочно принимаете все условия настоящего Соглашения.</p>
+                    <p class="eula-1-3">1.3. Если вы не согласны с условиями настоящего Соглашения, вы не имеете права использовать Приложение и должны немедленно удалить его со своего устройства.</p>
+                </div>
+                
+                <div class="section">
+                    <h2><i class="fas fa-laptop-code"></i> <span class="eula-2">2. ЛИЦЕНЗИЯ</span></h2>
+                    <p class="eula-2-1">2.1. Правообладатель предоставляет вам ограниченную, непередаваемую, неисключительную, отзывную лицензию на установку и запуск Приложения на мобильном устройстве для личных некоммерческих целей.</p>
+                    <p class="eula-2-2">2.2. Лицензия предоставляется на весь срок действия авторских прав на Приложение.</p>
+                </div>
+                
+                <div class="section">
+                    <h2><i class="fas fa-ban"></i> <span class="eula-3">3. ОГРАНИЧЕНИЯ И ЗАПРЕТЫ</span></h2>
+                    <ul>
+                        <li class="eula-3-1">копировать, модифицировать, создавать производные работы, декомпилировать, дизассемблировать Приложение;</li>
+                        <li class="eula-3-2">удалять, скрывать или изменять любые уведомления об авторских правах;</li>
+                        <li class="eula-3-3">использовать Приложение в коммерческих целях без соответствующей профессиональной квалификации;</li>
+                        <li class="eula-3-4">распространять, лицензировать, передавать, продавать, сдавать в аренду Приложение.</li>
+                    </ul>
+                </div>
+                
+                <div class="section">
+                    <h2><i class="fas fa-exclamation-triangle"></i> <span class="eula-4">4. ПРОФЕССИОНАЛЬНЫЙ ХАРАКТЕР ИНФОРМАЦИИ</span></h2>
+                    <p class="eula-4-1">4.1. Приложение предоставляет расчеты и рекомендации на основе алгоритмов, учитывающих профессиональные принципы колористики. Однако:</p>
+                    <ul>
+                        <li class="eula-4-2">Приложение НЕ является заменой профессиональной консультации лицензированного парикмахера-колориста;</li>
+                        <li class="eula-4-3">все расчеты носят рекомендательный характер и могут отличаться от реальных результатов;</li>
+                        <li class="eula-4-4">Правообладатель не гарантирует точность, полноту или применимость расчетов для конкретного случая.</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <p><strong>Важно:</strong> Перед применением любого красителя или тонирующего средства Пользователь обязан самостоятельно провести тест на аллергию в соответствии с инструкцией производителя.</p>
+                    </div>
+                    <p class="eula-4-5">4.2. Вы используете расчеты и рекомендации Приложения исключительно на свой страх и риск. Правообладатель не несет ответственности за любые повреждения волос, кожи головы, аллергические реакции.</p>
+                </div>
+                
+                <div class="section">
+                    <h2><i class="fas fa-balance-scale"></i> <span class="eula-5">5. ОТКАЗ ОТ ГАРАНТИЙ И ОГРАНИЧЕНИЕ ОТВЕТСТВЕННОСТИ</span></h2>
+                    <p class="eula-5-1">5.1. Приложение предоставляется «как есть» и «по мере доступности» без каких-либо гарантий.</p>
+                    <p class="eula-5-2">5.2. Правообладатель не несет ответственности за любые косвенные, случайные, специальные или последующие убытки, возникшие в связи с использованием или невозможностью использования Приложения.</p>
+                </div>
+                
+                <div class="section">
+                    <h2><i class="fas fa-edit"></i> <span class="eula-6">6. ИЗМЕНЕНИЯ СОГЛАШЕНИЯ</span></h2>
+                    <p class="eula-6-1">6.1. Правообладатель оставляет за собой право в любое время изменять условия настоящего Соглашения. Новая редакция вступает в силу с момента её публикации.</p>
+                    <p class="eula-6-2">6.2. Продолжая использовать Приложение после внесения изменений, вы подтверждаете свое согласие с новой редакцией.</p>
+                </div>
+                
+                <div class="section">
+                    <h2><i class="fas fa-address-card"></i> <span class="eula-7">7. КОНТАКТНАЯ ИНФОРМАЦИЯ</span></h2>
+                    <div class="contact-block">
+                        <h3><i class="fas fa-envelope"></i> По всем вопросам</h3>
+                        <div class="contact-email">
+                            <i class="far fa-envelope"></i> meledy11@yandex.ru
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+    
+    // Обновление всех текстов на текущем языке
+    function updateTexts() {
+        // Название приложения
+        document.getElementById('app-name').textContent = translations.appName[currentLang];
+        document.getElementById('footer-name').textContent = translations.appName[currentLang];
         
-        // обновляем все элементы с data-lang-*
-        document.querySelectorAll('[data-lang-ru]').forEach(el => {
-            const translation = el.getAttribute(`data-lang-${currentLang}`);
-            if (translation) {
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = translation;
-                else el.innerText = translation;
-            }
-        });
+        // Вкладки
+        document.getElementById('tab-privacy-text').textContent = translations.privacyTab[currentLang];
+        document.getElementById('tab-eula-text').textContent = translations.eulaTab[currentLang];
         
-        // дополнительно обновляем заголовки doc-title, которые могут быть в динамическом контенте
-        const docTitleSpans = document.querySelectorAll('.doc-title-text');
-        if (docTitleSpans.length) {
-            const key = currentTab === 'privacy' ? 'privacy' : 'eulaTitle';
-            docTitleSpans.forEach(span => {
-                span.innerText = translations[key][currentLang];
-            });
+        // Подвал
+        document.getElementById('last-updated-text').textContent = translations.lastUpdated[currentLang];
+        document.getElementById('copyright-text').textContent = translations.copyright[currentLang];
+        document.getElementById('author-name').textContent = translations.author[currentLang];
+        
+        // Обновляем тексты внутри документа
+        const container = document.getElementById('doc-content');
+        if (container) {
+            const elements = container.querySelectorAll('[class*="text-"], [class*="section-title-"], [class*="eula-"], [class*="goal-"], [class*="li-"]');
+            // Используем заранее подготовленные переводы для всех элементов
+            applyTranslationsToDocument(container);
+        }
+    }
+    
+    function applyTranslationsToDocument(container) {
+        const translationsMap = {
+            // Privacy section titles
+            '.section-title-1': { ru: '1. ОБЩИЕ ПОЛОЖЕНИЯ', en: '1. GENERAL PROVISIONS', zh: '1. 总则' },
+            '.section-title-2': { ru: '2. КАКИЕ ДАННЫЕ МЫ СОБИРАЕМ', en: '2. WHAT DATA WE COLLECT', zh: '2. 我们收集哪些数据' },
+            '.section-title-3': { ru: '3. ЦЕЛИ СБОРА ДАННЫХ', en: '3. PURPOSES OF DATA COLLECTION', zh: '3. 数据收集目的' },
+            '.section-title-4': { ru: '4. ОБРАБОТКА И ХРАНЕНИЕ ДАННЫХ', en: '4. DATA PROCESSING AND STORAGE', zh: '4. 数据处理和存储' },
+            '.section-title-5': { ru: '5. КОНТАКТНАЯ ИНФОРМАЦИЯ', en: '5. CONTACT INFORMATION', zh: '5. 联系信息' },
+            '.doc-title-text': { ru: currentTab === 'privacy' ? 'ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ' : 'ЛИЦЕНЗИОННОЕ СОГЛАШЕНИЕ', 
+                                 en: currentTab === 'privacy' ? 'PRIVACY POLICY' : 'LICENSE AGREEMENT',
+                                 zh: currentTab === 'privacy' ? '隐私政策' : '许可协议' }
+        };
+        
+        for (const [selector, texts] of Object.entries(translationsMap)) {
+            const el = container.querySelector(selector);
+            if (el && texts[currentLang]) el.textContent = texts[currentLang];
         }
         
-        // обновляем кнопки вкладок (текст)
-        const tabPrivacySpan = document.querySelector('.tab-btn[data-tab="privacy"] span');
-        const tabEulaSpan = document.querySelector('.tab-btn[data-tab="eula"] span');
-        if (tabPrivacySpan) tabPrivacySpan.innerText = currentLang === 'ru' ? 'Политика конфиденциальности' : (currentLang === 'en' ? 'Privacy Policy' : '隐私政策');
-        if (tabEulaSpan) tabEulaSpan.innerText = currentLang === 'ru' ? 'Лицензионное соглашение' : (currentLang === 'en' ? 'License Agreement' : '许可协议');
+        // Privacy text paragraphs
+        const privacyTexts = {
+            '.text-1-1': { ru: '1.1. Настоящая Политика конфиденциальности определяет порядок обработки и защиты персональных данных пользователей мобильного приложения «Мастер-колорист» («Приложение»), разработанного Чиграковой Анастасией Сергеевной («Оператор»).',
+                          en: '1.1. This Privacy Policy defines the procedure for processing and protecting personal data of users of the mobile application "Hair Colorist" ("Application"), developed by Anastasia Chigrakova ("Operator").',
+                          zh: '1.1. 本隐私政策规定了由Anastasia Chigrakova（"运营商"）开发的移动应用程序"染发专家"（"应用程序"）用户个人数据的处理和保护程序。' },
+            '.text-1-2': { ru: '1.2. Оператор обязуется соблюдать конфиденциальность персональных данных Пользователя в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».',
+                          en: '1.2. The Operator undertakes to maintain the confidentiality of the User\'s personal data in accordance with Federal Law No. 152-FZ.',
+                          zh: '1.2. 运营商承诺根据俄罗斯联邦法律对用户的个人数据保密。' },
+            '.text-1-3': { ru: '1.3. Используя Приложение, Пользователь выражает своё согласие с условиями настоящей Политики.',
+                          en: '1.3. By using the Application, the User expresses their consent to the terms of this Policy.',
+                          zh: '1.3. 使用应用程序即表示用户同意本政策的条款。' }
+        };
+        
+        for (const [selector, texts] of Object.entries(privacyTexts)) {
+            const el = container.querySelector(selector);
+            if (el && texts[currentLang]) el.textContent = texts[currentLang];
+        }
     }
-
-    function renderContent() {
+    
+    // Рендер текущей вкладки
+    function renderTab() {
         const container = document.getElementById('doc-content');
         if (currentTab === 'privacy') {
-            container.innerHTML = privacyHTML;
+            container.innerHTML = getPrivacyHTML();
         } else {
-            container.innerHTML = eulaHTML;
+            container.innerHTML = getEulaHTML();
         }
-        // после вставки контента обновляем тексты под текущий язык
-        updateAllTexts();
+        updateTexts();
     }
-
+    
+    // Переключение языка
     function setLanguage(lang) {
         currentLang = lang;
-        // обновляем активные кнопки языка
         document.querySelectorAll('.lang-btn').forEach(btn => {
             if (btn.dataset.lang === lang) btn.classList.add('active');
             else btn.classList.remove('active');
         });
-        renderContent(); // перерисовка с новым языком
+        renderTab();
+        localStorage.setItem('preferredLanguage', lang);
     }
-
+    
+    // Переключение вкладки
     function setTab(tab) {
         currentTab = tab;
         document.querySelectorAll('.tab-btn').forEach(btn => {
             if (btn.dataset.tab === tab) btn.classList.add('active');
             else btn.classList.remove('active');
         });
-        renderContent();
+        renderTab();
     }
-
-    // дата
+    
+    // Установка даты
     function setCurrentDate() {
         const now = new Date();
         const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
-        const dateStr = `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()} г.`;
-        document.getElementById('current-date').innerText = dateStr;
-        document.getElementById('current-year').innerText = now.getFullYear();
+        document.getElementById('current-date').textContent = `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()} г.`;
+        document.getElementById('current-year').textContent = now.getFullYear();
     }
-
-    // тема
+    
+    // Тема
     function setupTheme() {
         const themeToggle = document.getElementById('theme-toggle');
         const themeIcon = document.getElementById('theme-icon');
-        const body = document.body;
         const saved = localStorage.getItem('theme');
         if (saved === 'dark') {
-            body.classList.add('dark-theme');
+            document.body.classList.add('dark-theme');
             themeIcon.className = 'fas fa-sun';
         }
         themeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-theme');
-            const isDark = body.classList.contains('dark-theme');
+            document.body.classList.toggle('dark-theme');
+            const isDark = document.body.classList.contains('dark-theme');
             themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
         });
     }
-
-    // инициализация
+    
+    // Инициализация
     document.addEventListener('DOMContentLoaded', () => {
         setCurrentDate();
         setupTheme();
         
-        // кнопки языка
+        // Кнопки языка
         document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                setLanguage(btn.dataset.lang);
-            });
+            btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
         });
         
-        // кнопки вкладок
+        // Кнопки вкладок
         document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                setTab(btn.dataset.tab);
-            });
+            btn.addEventListener('click', () => setTab(btn.dataset.tab));
         });
         
-        // начальный рендер
-        renderContent();
-        // синхронизация языка из localStorage (если есть)
+        // Загрузка сохранённого языка
         const savedLang = localStorage.getItem('preferredLanguage');
-        if (savedLang && (savedLang === 'ru' || savedLang === 'en' || savedLang === 'zh')) {
+        if (savedLang && ['ru', 'en', 'zh'].includes(savedLang)) {
             setLanguage(savedLang);
         } else {
             setLanguage('ru');
         }
-        // сохраняем выбранный язык при переключении
-        const originalSetLang = setLanguage;
-        window.setLanguage = function(lang) {
-            localStorage.setItem('preferredLanguage', lang);
-            originalSetLang(lang);
-        };
-        setLanguage = function(lang) {
-            localStorage.setItem('preferredLanguage', lang);
-            originalSetLang(lang);
-        }.bind(this);
-        // подменяем для корректной работы
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.removeEventListener('click', btn.click);
-            btn.addEventListener('click', () => {
-                const l = btn.dataset.lang;
-                localStorage.setItem('preferredLanguage', l);
-                setLanguage(l);
-            });
-        });
-        // перевызов синхронизации
-        if (savedLang) setLanguage(savedLang);
     });
 </script>
 </body>
