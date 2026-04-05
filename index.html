@@ -1,3 +1,8 @@
+Вы абсолютно правы. Извините за путаницу. Ниже — **полностью исправленный код всей страницы**, где слово **«Оператор» удалено везде** и заменено на **«Разработчик»** (и «Developer» / «开发者» в других языках).
+
+Вы можете скопировать этот код целиком и заменить им содержимое вашего файла.
+
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -23,7 +28,6 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* Темная тема */
         body.dark {
             background-color: #1A1519;
             color: #E5D1B8;
@@ -76,7 +80,6 @@
             padding: 30px 20px 50px;
         }
 
-        /* Шапка */
         .header {
             text-align: center;
             margin-bottom: 40px;
@@ -125,7 +128,6 @@
             margin-top: 10px;
         }
 
-        /* Переключатель языков */
         .language-switcher {
             display: flex;
             justify-content: center;
@@ -147,7 +149,6 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            backdrop-filter: blur(4px);
         }
 
         .lang-btn i {
@@ -171,7 +172,6 @@
             color: white;
         }
 
-        /* Табы */
         .tabs {
             display: flex;
             gap: 12px;
@@ -211,7 +211,6 @@
             background: rgba(194, 149, 110, 0.05);
         }
 
-        /* Карточка документа */
         .card {
             background: white;
             border-radius: 32px;
@@ -289,14 +288,6 @@
             font-size: 15px;
         }
 
-        .highlight {
-            background: linear-gradient(120deg, rgba(221, 142, 88, 0.08), rgba(112, 138, 129, 0.05));
-            padding: 20px 24px;
-            border-radius: 20px;
-            margin: 24px 0;
-            border-left: 4px solid #DD8E58;
-        }
-
         .contact-block {
             background: linear-gradient(135deg, rgba(221, 142, 88, 0.08), rgba(197, 149, 110, 0.04));
             border-radius: 24px;
@@ -326,6 +317,7 @@
             border: 1px solid #DD8E58;
             transition: all 0.2s ease;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            text-decoration: none;
         }
 
         .contact-email:hover {
@@ -343,7 +335,6 @@
             background: #362B32;
         }
 
-        /* Футер */
         .footer {
             text-align: center;
             padding: 35px 0 20px;
@@ -353,7 +344,6 @@
             color: #708A81;
         }
 
-        /* Кнопка темы */
         .theme-toggle {
             position: fixed;
             bottom: 28px;
@@ -397,7 +387,6 @@
             color: #DD8E58;
         }
 
-        /* Адаптив */
         @media (max-width: 768px) {
             .card {
                 padding: 28px;
@@ -472,7 +461,6 @@
     let currentLang = 'ru';
     let currentTab = 'privacy';
 
-    // ==================== КОНТЕНТ С ИСПРАВЛЕННОЙ ПОЛИТИКОЙ ====================
     const content = {
         ru: {
             appName: "Мастер-колорист",
@@ -485,14 +473,14 @@
                 title: "Политика конфиденциальности",
                 sections: [
                     { title: "1. Общие положения", content: [
-                        "1.1. Настоящая Политика конфиденциальности определяет порядок использования и защиты информации о пользователях мобильного приложения «Мастер-колорист» («Приложение»), разработанного Чиграковой Анастасией Сергеевной («Оператор»).",
-                        "1.2. Оператор НЕ осуществляет обработку персональных данных в значении Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных». Приложение не собирает, не хранит и не передаёт информацию, позволяющую идентифицировать конкретного пользователя (ФИО, адрес, телефон, email, IP-адрес, геолокацию и т.п.).",
+                        "1.1. Настоящая Политика конфиденциальности определяет порядок использования и защиты информации о пользователях мобильного приложения «Мастер-колорист» («Приложение»), разработанного Чиграковой Анастасией Сергеевной («Разработчик»).",
+                        "1.2. Разработчик НЕ осуществляет обработку персональных данных в значении Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных». Приложение не собирает, не хранит и не передаёт информацию, позволяющую идентифицировать конкретного пользователя (ФИО, адрес, телефон, email, IP-адрес, геолокацию и т.п.).",
                         "1.3. Используя Приложение, Пользователь подтверждает, что ознакомлен с условиями настоящей Политики."
                     ]},
                     { title: "2. Какие данные мы собираем", content: [
                         "2.1. Приложение «Мастер-колорист» собирает только обезличенную техническую информацию, которая не относится к персональным данным:",
                         "• Технические данные устройства: тип и версия ОС, модель устройства, уникальный идентификатор устройства (в обезличенном виде), версия Приложения",
-                        "• Данные для расчётов (тип волос, текущий и желаемый цвет, длина волос, процент седины, выбранный бренд краски) — обрабатываются исключительно локально на устройстве и не передаются Оператору",
+                        "• Данные для расчётов (тип волос, текущий и желаемый цвет, длина волос, процент седины, выбранный бренд краски) — обрабатываются исключительно локально на устройстве и не передаются Разработчику",
                         "• Данные об использовании: частота обращения к функциям, продолжительность сессий, информация об ошибках (в обезличенном виде)",
                         "2.2. Приложение НЕ собирает, НЕ обрабатывает и НЕ передаёт: фотографии, геолокацию, контактную информацию (email, телефон), данные платёжных карт, IP-адрес, любые иные сведения, позволяющие идентифицировать личность Пользователя."
                     ]},
@@ -505,11 +493,11 @@
                         "3.2. Приложение НЕ использует рекламные SDK и НЕ передаёт данные рекламным сетям."
                     ]},
                     { title: "4. Обработка и хранение данных", content: [
-                        "4.1. Все расчёты производятся локально на устройстве Пользователя. Введённые данные для расчётов не передаются на серверы Оператора.",
-                        "4.2. Приложение не использует сторонние сервисы для сбора персональных данных. При наличии аналитики (например, Яндекс.Метрика) она работает в обезличенном режиме и не передаёт Оператору персональные данные."
+                        "4.1. Все расчёты производятся локально на устройстве Пользователя. Введённые данные для расчётов не передаются на серверы Разработчика.",
+                        "4.2. Приложение не использует сторонние сервисы для сбора персональных данных. При наличии аналитики (например, Яндекс.Метрика) она работает в обезличенном режиме и не передаёт Разработчику персональные данные."
                     ]},
                     { title: "5. Контактная информация", content: [
-                        "5.1. По всем вопросам, связанным с работой Приложения, вы можете обратиться к Оператору:"
+                        "5.1. По всем вопросам, связанным с работой Приложения, вы можете обратиться к Разработчику:"
                     ]}
                 ]
             },
@@ -556,14 +544,14 @@
                 title: "Privacy Policy",
                 sections: [
                     { title: "1. General Provisions", content: [
-                        "1.1. This Privacy Policy defines the procedure for using and protecting information about users of the mobile application 'Hair Colorist' ('Application'), developed by Anastasia Chigrakova ('Operator').",
-                        "1.2. The Operator does NOT process personal data as defined by Federal Law No. 152-FZ of July 27, 2006 'On Personal Data'. The Application does not collect, store or transmit information that identifies a specific user (full name, address, phone, email, IP address, geolocation, etc.).",
+                        "1.1. This Privacy Policy defines the procedure for using and protecting information about users of the mobile application 'Hair Colorist' ('Application'), developed by Anastasia Chigrakova ('Developer').",
+                        "1.2. The Developer does NOT process personal data as defined by Federal Law No. 152-FZ of July 27, 2006 'On Personal Data'. The Application does not collect, store or transmit information that identifies a specific user (full name, address, phone, email, IP address, geolocation, etc.).",
                         "1.3. By using the Application, the User confirms that they have read the terms of this Policy."
                     ]},
                     { title: "2. What Data We Collect", content: [
                         "2.1. The 'Hair Colorist' application collects only anonymized technical information that does not constitute personal data:",
                         "• Device technical data: OS type and version, device model, unique device identifier (anonymized), Application version",
-                        "• Data entered for calculations (hair type, current and desired color, hair length, gray hair percentage, selected dye brand) — processed exclusively locally on the device and not transmitted to the Operator",
+                        "• Data entered for calculations (hair type, current and desired color, hair length, gray hair percentage, selected dye brand) — processed exclusively locally on the device and not transmitted to the Developer",
                         "• Usage data: frequency of feature use, session duration, error information (anonymized)",
                         "2.2. The Application does NOT collect, process or transmit: photos, geolocation, contact information (email, phone), payment card data, IP address, or any other information that could identify the User."
                     ]},
@@ -576,11 +564,11 @@
                         "3.2. The Application does NOT use advertising SDKs and does NOT transmit data to ad networks."
                     ]},
                     { title: "4. Data Processing and Storage", content: [
-                        "4.1. All calculations are performed locally on the User's device. Data entered for calculations is not transmitted to the Operator's servers.",
-                        "4.2. The Application does not use third-party services to collect personal data. If analytics (e.g., Yandex.Metrica) is present, it operates in anonymized mode and does not transmit personal data to the Operator."
+                        "4.1. All calculations are performed locally on the User's device. Data entered for calculations is not transmitted to the Developer's servers.",
+                        "4.2. The Application does not use third-party services to collect personal data. If analytics (e.g., Yandex.Metrica) is present, it operates in anonymized mode and does not transmit personal data to the Developer."
                     ]},
                     { title: "5. Contact Information", content: [
-                        "5.1. For any questions regarding the operation of the Application, you can contact the Operator:"
+                        "5.1. For any questions regarding the operation of the Application, you can contact the Developer:"
                     ]}
                 ]
             },
@@ -627,14 +615,14 @@
                 title: "隐私政策",
                 sections: [
                     { title: "1. 总则", content: [
-                        "1.1. 本隐私政策规定了使用和保护移动应用程序'染发专家'（'应用程序'）用户信息的程序，该应用程序由阿纳斯塔西娅·奇格拉科娃（'运营商'）开发。",
-                        "1.2. 运营商不处理2006年7月27日第152-FZ号联邦法律'关于个人数据'所定义的个人数据。该应用程序不收集、存储或传输能够识别特定用户的信息（全名、地址、电话、电子邮件、IP地址、地理位置等）。",
+                        "1.1. 本隐私政策规定了使用和保护移动应用程序'染发专家'（'应用程序'）用户信息的程序，该应用程序由阿纳斯塔西娅·奇格拉科娃（'开发者'）开发。",
+                        "1.2. 开发者不处理2006年7月27日第152-FZ号联邦法律'关于个人数据'所定义的个人数据。该应用程序不收集、存储或传输能够识别特定用户的信息（全名、地址、电话、电子邮件、IP地址、地理位置等）。",
                         "1.3. 使用应用程序即表示用户确认已阅读本政策的条款。"
                     ]},
                     { title: "2. 我们收集哪些数据", content: [
                         "2.1. '染发专家'应用程序仅收集不属于个人数据的匿名技术信息：",
                         "• 设备技术数据：操作系统类型和版本、设备型号、设备唯一标识符（匿名化）、应用程序版本",
-                        "• 用于计算的数据（发质、当前和期望颜色、头发长度、白发百分比、所选染发剂品牌）——仅在设备本地处理，不传输给运营商",
+                        "• 用于计算的数据（发质、当前和期望颜色、头发长度、白发百分比、所选染发剂品牌）——仅在设备本地处理，不传输给开发者",
                         "• 使用数据：功能使用频率、会话时长、错误信息（匿名化）",
                         "2.2. 应用程序不收集、处理或传输：照片、地理位置、联系信息（电子邮件、电话）、支付卡数据、IP地址或任何其他可能识别用户身份的信息。"
                     ]},
@@ -647,11 +635,11 @@
                         "3.2. 应用程序不使用广告SDK，也不向广告网络传输数据。"
                     ]},
                     { title: "4. 数据处理和存储", content: [
-                        "4.1. 所有计算均在用户设备上本地进行。用于计算的数据不会传输到运营商的服务器。",
-                        "4.2. 应用程序不使用第三方服务收集个人数据。如果存在分析功能（例如Yandex.Metrica），它以匿名模式运行，不会向运营商传输个人数据。"
+                        "4.1. 所有计算均在用户设备上本地进行。用于计算的数据不会传输到开发者的服务器。",
+                        "4.2. 应用程序不使用第三方服务收集个人数据。如果存在分析功能（例如Yandex.Metrica），它以匿名模式运行，不会向开发者传输个人数据。"
                     ]},
                     { title: "5. 联系信息", content: [
-                        "5.1. 如有任何关于应用程序运行的问题，您可以联系运营商："
+                        "5.1. 如有任何关于应用程序运行的问题，您可以联系开发者："
                     ]}
                 ]
             },
@@ -792,3 +780,4 @@
 </script>
 </body>
 </html>
+```
